@@ -11,10 +11,8 @@ jobs:
       - name: Checkout the current branch
         uses: actions/checkout@v3
 
-      - name: Initialize the ssh-agent
-        uses: webfactory/ssh-agent@v0.4.1
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: sign-in
+        run: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Install Hugp
         run: sudo snap install hugo
