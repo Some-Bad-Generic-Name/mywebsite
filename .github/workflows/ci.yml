@@ -11,19 +11,18 @@ jobs:
       - name: Checkout the current branch
         uses: actions/checkout@v3
 
-      - name: sign-in
-        run: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: SSH and run commands
+            uses: appleboy/ssh-action@master
+            with:
+              host: ${{ secrets.DEPLOY_SERVER }}
+              username: ${{ secrets.DEPLOY_USERNAME }}
+              password: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Install Hugp
         run: sudo snap install hugo
 
       - name: Build the website
         run: hugo
-
-      - name: Scan the host key
-        run: mkdir -p ~/.ssh/ && ssh-keyscan -H $DEPLOY_SERVER >> ~/.ssh/known_hosts
-        env:
-          DEPLOY_SERVER: ${{ secrets.DEPLOY_SERVER }}
 
       - name: Deploy the website
         run: >-
