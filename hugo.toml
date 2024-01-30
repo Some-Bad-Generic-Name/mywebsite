@@ -1,0 +1,5 @@
+baseURL = 'kaese.zip/'
+languageCode = 'en-us'
+title = 'Kaese'
+
+theme = "blowfish"
